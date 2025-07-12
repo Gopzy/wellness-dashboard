@@ -1,15 +1,26 @@
 import React from "react";
-import logo from "./logo.svg";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoginPage from "./features/auth/LoginPage";
+import SignupPage from "./features/auth/SignupPage";
+import DashboardPage from "./features/wellness/DashboardPage";
 import "./App.css";
 import "./index.css";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <div>
-      <div className="bg-indigo-500 text-white p-4 rounded-xl">
-        Hello Tailwind
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<SignupPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* Protected routes */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<DashboardPage />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
