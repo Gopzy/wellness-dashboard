@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store";
 import { setCredentials } from "./authSlice";
 import { signup } from "../../api/auth";
-// import { signup } from "@/api/auth"; // We'll build this in next step
+import AuthFormLayout from "../../components/AuthFormLayout";
 
 const SignupPage: React.FC = () => {
   const navigate = useNavigate();
@@ -36,68 +36,56 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="bg-white rounded-xl shadow-md p-6 w-full max-w-md space-y-4"
-      >
-        <h2 className="text-2xl font-semibold text-center">Create Account</h2>
+    <AuthFormLayout
+      title="Create Account"
+      onSubmit={handleSubmit(onSubmit)}
+      submitLabel="Sign Up"
+      isSubmitting={isSubmitting}
+    >
+      <div>
+        <label className="block mb-1 text-sm font-medium text-gray-700">
+          Email
+        </label>
+        <input
+          type="email"
+          {...register("email")}
+          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+        {errors.email && (
+          <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
+        )}
+      </div>
 
-        <div>
-          <label className="block mb-1 text-sm font-medium text-gray-700">
-            Email
-          </label>
-          <input
-            type="email"
-            {...register("email")}
-            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-          {errors.email && (
-            <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
-          )}
-        </div>
+      <div>
+        <label className="block mb-1 text-sm font-medium text-gray-700">
+          Password
+        </label>
+        <input
+          type="password"
+          {...register("password")}
+          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+        {errors.password && (
+          <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>
+        )}
+      </div>
 
-        <div>
-          <label className="block mb-1 text-sm font-medium text-gray-700">
-            Password
-          </label>
-          <input
-            type="password"
-            {...register("password")}
-            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-          {errors.password && (
-            <p className="text-sm text-red-500 mt-1">
-              {errors.password.message}
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label className="block mb-1 text-sm font-medium text-gray-700">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            {...register("confirmPassword")}
-            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-          {errors.confirmPassword && (
-            <p className="text-sm text-red-500 mt-1">
-              {errors.confirmPassword.message}
-            </p>
-          )}
-        </div>
-
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition-colors"
-        >
-          {isSubmitting ? "Signing up..." : "Sign Up"}
-        </button>
-      </form>
-    </div>
+      <div>
+        <label className="block mb-1 text-sm font-medium text-gray-700">
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          {...register("confirmPassword")}
+          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+        {errors.confirmPassword && (
+          <p className="text-sm text-red-500 mt-1">
+            {errors.confirmPassword.message}
+          </p>
+        )}
+      </div>
+    </AuthFormLayout>
   );
 };
 

@@ -1,29 +1,49 @@
+import { api } from "./axios";
+
 export interface SignupResponse {
   token: string;
   user: {
+    id: number;
     email: string;
   };
 }
 
-/**
- * Simulates an async signup call to a backend and returns a mock JWT.
- */
-export const signup = (
+export const signup = async (
   email: string,
   password: string
 ): Promise<SignupResponse> => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      // Fake user already exists error
-      if (email === "existing@example.com") {
-        return reject(new Error("Email already in use."));
-      }
+  // Check if user already exists
+  const existing = await api.get(`/users?email=${email}`);
+  if (existing.data.length > 0) {
+    throw new Error("Email already exists");
+  }
 
-      // Mock token + user
-      resolve({
-        token: "mock-jwt-token-1234567890",
-        user: { email },
-      });
-    }, 1000);
-  });
+  // Create new user
+  const response = await api.post("/users", { email, password });
+
+  return {
+    token: "mock-token-" + Date.now(),
+    user: response.data,
+  };
+};
+
+export const login = async (
+  email: string,
+  password: string
+): Promise<SignupResponse> => {
+  const response = await api.get(`/users?email=${email}`);
+  const user = response.data[0];
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  if (user.password !== password) {
+    throw new Error("Invalid password");
+  }
+
+  return {
+    token: "mock-token-" + Date.now(),
+    user,
+  };
 };
