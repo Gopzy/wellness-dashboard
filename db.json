@@ -4,6 +4,11 @@
       "id": "b06c",
       "email": "goavardanan@gmail.com",
       "password": "pass1234"
+    },
+    {
+      "id": "e8c9",
+      "email": "john@gmail.com",
+      "password": "john1234"
     }
   ],
   "logs": []

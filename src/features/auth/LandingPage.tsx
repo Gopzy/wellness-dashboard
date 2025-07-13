@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../store";
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-indigo-100 to-indigo-300 text-center px-4">
