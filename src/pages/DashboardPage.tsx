@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store";
 import { logout } from "../store/reducer/authSlice";
 import WellnessForm from "../components/WellnessForm";
-// import { loadLogs } from "../features/wellness/logSlice";
 import LoadingWrapper from "../components/LoadingWrapper";
 import { loadLogs } from "../store/reducer/logSlice";
+import ThemeToggle from "../components/ThemeToggle";
 
 const LogTable = lazy(() => import("../components/LogTable"));
 
@@ -31,11 +31,15 @@ const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
       <header className="bg-indigo-600 text-white py-4 px-6 flex justify-between items-center">
         <h1 className="text-xl font-semibold">Wellness Dashboard</h1>
+
         <div className="flex items-center space-x-4">
+          {/* Theme Toggle */}
+
           <span className="text-sm">{user?.email}</span>
+          <ThemeToggle />
           <button
             onClick={handleLogout}
             className="bg-white text-indigo-600 px-3 py-1 rounded hover:bg-gray-200 text-sm"

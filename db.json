@@ -19,37 +19,10 @@
       "notes": "Had good sleep"
     },
     {
-      "id": "b5c8",
-      "mood": "Stressed",
-      "sleepHours": 2,
-      "notes": "not a good sleep"
-    },
-    {
-      "id": "bfb4",
-      "mood": "Tired",
-      "sleepHours": 6,
-      "notes": "feeling tired",
-      "userId": "b06c"
-    },
-    {
-      "id": "a8bb",
+      "id": "1c1c",
       "mood": "Focused",
-      "sleepHours": 8,
-      "notes": "focus good sleep",
-      "userId": "b06c"
-    },
-    {
-      "id": "03ca",
-      "mood": "Happy",
-      "sleepHours": 9,
-      "notes": "Great sleep recorded",
-      "userId": "b06c"
-    },
-    {
-      "id": "bd51",
-      "mood": "Focused",
-      "sleepHours": 6,
-      "notes": "Focused as an arrow",
+      "sleepHours": 5,
+      "notes": "decent sleep focusd",
       "userId": "b06c"
     }
   ]
