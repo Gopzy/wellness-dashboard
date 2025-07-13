@@ -6,12 +6,13 @@ import DashboardPage from "./features/wellness/DashboardPage";
 import "./App.css";
 import "./index.css";
 import ProtectedRoute from "./components/ProtectedRoute";
+import LandingPage from "./features/auth/LandingPage";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<SignupPage />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
 
