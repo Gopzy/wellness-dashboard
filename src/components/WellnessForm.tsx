@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { WellnessFormData, wellnessSchema } from "../schema/wellnessSchema";
-import { useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 import { logWellnessEntry } from "../api/wellness";
+import { loadLogs } from "../features/wellness/logSlice";
 
 const moods = ["Happy", "Stressed", "Tired", "Focused"] as const;
 
@@ -24,13 +25,29 @@ const WellnessForm: React.FC = () => {
       notes: "",
     },
   });
-
+  const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.auth.token);
+  const user = useAppSelector((state) => state.auth.user);
+
   const [submitted, setSubmitted] = useState(false);
+
+  //   const onSubmit = async (data: WellnessFormData) => {
+  //     try {
+  //       await logWellnessEntry(data, token!);
+  //       setSubmitted(true);
+  //       reset();
+  //       setTimeout(() => setSubmitted(false), 3000);
+  //     } catch (error) {
+  //       alert("Something went wrong while saving your log.");
+  //     }
+  //   };
 
   const onSubmit = async (data: WellnessFormData) => {
     try {
-      await logWellnessEntry(data, token!);
+      if (!token || !user) return;
+
+      await logWellnessEntry(data, token, user.id);
+      dispatch(loadLogs({ userId: user.id, token }));
       setSubmitted(true);
       reset();
       setTimeout(() => setSubmitted(false), 3000);

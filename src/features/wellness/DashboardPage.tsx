@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { logout } from "../auth/authSlice";
 import WellnessForm from "../../components/WellnessForm";
+import { loadLogs } from "./logSlice";
+import LogTable from "../../components/LogTable";
 
 const DashboardPage: React.FC = () => {
   const user = useAppSelector((state) => state.auth.user);
+  const token = useAppSelector((state) => state.auth.token);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user && token) {
+      dispatch(loadLogs({ userId: user.id, token }));
+    }
+  }, [user, token, dispatch]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -29,8 +38,12 @@ const DashboardPage: React.FC = () => {
         </div>
       </header>
 
-      <main className="p-4">
+      <main className="p-4 space-y-6">
+        {/* Form for adding new logs */}
         <WellnessForm />
+
+        {/* Table for displaying logs */}
+        <LogTable />
       </main>
     </div>
   );

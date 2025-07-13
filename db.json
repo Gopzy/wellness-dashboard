@@ -11,5 +11,25 @@
       "password": "john1234"
     }
   ],
-  "logs": []
+  "logs": [
+    {
+      "id": "adcf",
+      "mood": "Happy",
+      "sleepHours": 7,
+      "notes": "Had good sleep"
+    },
+    {
+      "id": "b5c8",
+      "mood": "Stressed",
+      "sleepHours": 2,
+      "notes": "not a good sleep"
+    },
+    {
+      "id": "bfb4",
+      "mood": "Tired",
+      "sleepHours": 6,
+      "notes": "feeling tired",
+      "userId": "b06c"
+    }
+  ]
 }
