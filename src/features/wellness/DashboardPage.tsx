@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { logout } from "../auth/authSlice";
+import WellnessForm from "../../components/WellnessForm";
 
 const DashboardPage: React.FC = () => {
   const user = useAppSelector((state) => state.auth.user);
@@ -14,15 +15,23 @@ const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-500 to-blue-600 text-white p-6">
-      <h1 className="text-3xl font-bold mb-4">Welcome, {user?.email}</h1>
-      <p className="mb-8">You're now on the protected dashboard page 🎉</p>
-      <button
-        onClick={handleLogout}
-        className="bg-white text-indigo-600 font-medium py-2 px-4 rounded-md hover:bg-gray-200 transition"
-      >
-        Logout
-      </button>
+    <div className="min-h-screen bg-gray-100">
+      <header className="bg-indigo-600 text-white py-4 px-6 flex justify-between items-center">
+        <h1 className="text-xl font-semibold">Wellness Dashboard</h1>
+        <div className="flex items-center space-x-4">
+          <span className="text-sm">{user?.email}</span>
+          <button
+            onClick={handleLogout}
+            className="bg-white text-indigo-600 px-3 py-1 rounded hover:bg-gray-200 text-sm"
+          >
+            Logout
+          </button>
+        </div>
+      </header>
+
+      <main className="p-4">
+        <WellnessForm />
+      </main>
     </div>
   );
 };

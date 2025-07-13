@@ -1,45 +1,43 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signupSchema, SignupFormData } from "./signupSchema";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store";
-import { setCredentials } from "./authSlice";
-import { signup } from "../../api/auth";
-import AuthFormLayout from "../../components/AuthFormLayout";
+import { setCredentials } from "../../features/auth/authSlice";
+import AuthFormLayout from "../AuthFormLayout";
+import { loginSchema } from "../../schema/loginSchema";
+import { login } from "../../api/auth";
 
-const SignupPage: React.FC = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+type LoginFormData = z.infer<typeof loginSchema>;
 
+const LoginPage: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<SignupFormData>({
-    resolver: zodResolver(signupSchema),
-    mode: "onTouched",
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = async (data: SignupFormData) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const onSubmit = async (data: LoginFormData) => {
     try {
-      const result = await signup(data.email, data.password);
-
-      // Dispatch token and user to Redux
+      const result = await login(data.email, data.password);
       dispatch(setCredentials(result));
-
-      // Redirect to dashboard
       navigate("/dashboard");
     } catch (err: any) {
-      alert(err.message || "Signup failed");
+      alert(err.message || "Login failed");
     }
   };
 
   return (
     <AuthFormLayout
-      title="Create Account"
+      title="Login"
       onSubmit={handleSubmit(onSubmit)}
-      submitLabel="Sign Up"
+      submitLabel="Login"
       isSubmitting={isSubmitting}
     >
       <div>
@@ -69,24 +67,8 @@ const SignupPage: React.FC = () => {
           <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>
         )}
       </div>
-
-      <div>
-        <label className="block mb-1 text-sm font-medium text-gray-700">
-          Confirm Password
-        </label>
-        <input
-          type="password"
-          {...register("confirmPassword")}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-        {errors.confirmPassword && (
-          <p className="text-sm text-red-500 mt-1">
-            {errors.confirmPassword.message}
-          </p>
-        )}
-      </div>
     </AuthFormLayout>
   );
 };
 
-export default SignupPage;
+export default LoginPage;
