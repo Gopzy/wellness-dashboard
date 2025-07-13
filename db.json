@@ -30,6 +30,20 @@
       "sleepHours": 6,
       "notes": "feeling tired",
       "userId": "b06c"
+    },
+    {
+      "id": "a8bb",
+      "mood": "Focused",
+      "sleepHours": 8,
+      "notes": "focus good sleep",
+      "userId": "b06c"
+    },
+    {
+      "id": "03ca",
+      "mood": "Happy",
+      "sleepHours": 9,
+      "notes": "Great sleep recorded",
+      "userId": "b06c"
     }
   ]
 }
