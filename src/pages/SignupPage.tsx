@@ -1,12 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signupSchema, SignupFormData } from "../../schema/signupSchema";
+import { signupSchema, SignupFormData } from "../schema/signupSchema";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../store";
-import { setCredentials } from "../../features/auth/authSlice";
-import { signup } from "../../api/auth";
-import AuthFormLayout from "../AuthFormLayout";
+import { useAppDispatch } from "../store";
+import { setCredentials } from "../store/reducer/authSlice";
+import { signup } from "../api/auth";
+import AuthFormLayout from "../components/AuthFormLayout";
 
 const SignupPage: React.FC = () => {
   const navigate = useNavigate();

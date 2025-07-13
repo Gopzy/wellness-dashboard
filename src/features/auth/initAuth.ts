@@ -1,6 +1,7 @@
 import { store } from "../../store";
-import { setCredentials } from "./authSlice";
+import { setCredentials } from "../../store/reducer/authSlice";
 
+// function to persist the logged in user by restore auth session
 export const restoreAuthSession = () => {
   const token = localStorage.getItem("token");
   const user = localStorage.getItem("user");

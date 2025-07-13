@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { useAppSelector } from "../store";
+
 const LogTable: React.FC = () => {
-  const logs = useAppSelector((state) => state.logs.logs);
+  const logs = useAppSelector((state) => state.logs.logs); // Ensure you're using .logs not .entries
   const [search, setSearch] = useState("");
 
   const filteredLogs = useMemo(() => {
@@ -11,47 +12,48 @@ const LogTable: React.FC = () => {
   }, [logs, search]);
 
   return (
-    <div className="w-full max-w-4xl mx-auto mt-8">
-      <input
-        type="text"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        placeholder="Search by notes..."
-        className="w-full mb-4 px-4 py-2 border border-gray-300 rounded-md"
-      />
-
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white rounded-lg shadow-md">
-          <thead>
-            <tr className="bg-indigo-600 text-white">
-              <th className="py-2 px-4 text-left">Mood</th>
-              <th className="py-2 px-4 text-left">Sleep Hours</th>
-              <th className="py-2 px-4 text-left">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredLogs.map((log) => (
-              <tr key={log.id} className="border-t">
-                <td className="py-2 px-4">{log.mood}</td>
-                <td className="py-2 px-4">{log.sleepHours}h</td>
-                <td className="py-2 px-4">
-                  {log.notes || <span className="text-gray-400">—</span>}
-                </td>
-              </tr>
-            ))}
-            {filteredLogs.length === 0 && (
-              <tr>
-                <td
-                  colSpan={3}
-                  className="text-center py-4 text-gray-500 italic"
-                >
-                  No logs found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+    <div className="w-full max-w-5xl mx-auto mt-8 px-4">
+      <div className="mb-4 flex justify-between items-center">
+        <h2 className="text-xl font-semibold text-gray-800">Wellness Logs</h2>
+        <input
+          type="text"
+          placeholder="Search by activity notes..."
+          className="border border-gray-300 rounded-md px-3 py-2 w-full sm:w-80 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </div>
+
+      {filteredLogs.length === 0 ? (
+        <p className="text-gray-500 text-center">No logs found.</p>
+      ) : (
+        <div className="overflow-x-auto bg-white rounded-lg shadow-md">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-indigo-600 text-white">
+              <tr>
+                <th className="px-4 py-3 text-left text-sm font-medium">
+                  Mood
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-medium">
+                  Sleep (hrs)
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-medium">
+                  Activity Notes
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100 text-sm text-gray-700">
+              {filteredLogs.map((log) => (
+                <tr key={log.id}>
+                  <td className="px-4 py-2">{log.mood}</td>
+                  <td className="px-4 py-2">{log.sleepHours}</td>
+                  <td className="px-4 py-2">{log.notes || "-"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

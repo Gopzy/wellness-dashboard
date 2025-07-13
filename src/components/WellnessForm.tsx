@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { WellnessFormData, wellnessSchema } from "../schema/wellnessSchema";
 import { useAppDispatch, useAppSelector } from "../store";
-import { loadLogs, submitLog } from "../features/wellness/logSlice";
+import { submitLog } from "../store/reducer/logSlice";
 
 const moods = ["Happy", "Stressed", "Tired", "Focused"] as const;
 
@@ -73,9 +73,9 @@ const WellnessForm: React.FC = () => {
               </option>
             ))}
           </select>
-          {errors.mood && (
+          {errors.mood ? (
             <p className="text-sm text-red-500 mt-1">{errors.mood.message}</p>
-          )}
+          ) : null}
         </div>
 
         {/* Sleep Duration */}
@@ -97,11 +97,11 @@ const WellnessForm: React.FC = () => {
               />
             )}
           />
-          {errors.sleepHours && (
+          {errors.sleepHours ? (
             <p className="text-sm text-red-500 mt-1">
               {errors.sleepHours.message}
             </p>
-          )}
+          ) : null}
         </div>
 
         {/* Notes */}
@@ -119,9 +119,9 @@ const WellnessForm: React.FC = () => {
           <div className="text-right text-sm text-gray-500">
             {watch("notes")?.length || 0}/200 characters
           </div>
-          {errors.notes && (
+          {errors.notes ? (
             <p className="text-sm text-red-500 mt-1">{errors.notes.message}</p>
-          )}
+          ) : null}
         </div>
 
         {/* Submit Button */}
@@ -136,11 +136,11 @@ const WellnessForm: React.FC = () => {
         </div>
 
         {/* Confirmation */}
-        {submitted && (
+        {submitted ? (
           <div className="sm:col-span-2 text-green-600 text-sm mt-2">
             Wellness log submitted successfully 🎉
           </div>
-        )}
+        ) : null}
       </form>
     </div>
   );

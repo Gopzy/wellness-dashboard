@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../store";
+import { useAppSelector } from "../store";
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();

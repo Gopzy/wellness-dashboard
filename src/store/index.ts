@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
-import { authReducer } from "../features/auth/authSlice";
-import { logReducer } from "../features/wellness/logSlice";
+import { authReducer } from "./reducer/authSlice";
+import { logReducer } from "./reducer/logSlice";
+import { uiReducer } from "./reducer/uiSlice";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     logs: logReducer,
+    ui: uiReducer,
   },
 });
 

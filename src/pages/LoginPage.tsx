@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../store";
-import { setCredentials } from "../../features/auth/authSlice";
-import AuthFormLayout from "../AuthFormLayout";
-import { loginSchema } from "../../schema/loginSchema";
-import { login } from "../../api/auth";
+import { useAppDispatch } from "../store";
+import { setCredentials } from "../store/reducer/authSlice";
+import AuthFormLayout from "../components/AuthFormLayout";
+import { loginSchema } from "../schema/loginSchema";
+import { login } from "../api/auth";
 
 type LoginFormData = z.infer<typeof loginSchema>;
 

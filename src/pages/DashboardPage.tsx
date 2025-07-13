@@ -1,14 +1,21 @@
-import React, { useEffect } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store";
-import { logout } from "../auth/authSlice";
-import WellnessForm from "../../components/WellnessForm";
-import { loadLogs } from "./logSlice";
-import LogTable from "../../components/LogTable";
+import { useAppDispatch, useAppSelector } from "../store";
+import { logout } from "../store/reducer/authSlice";
+import WellnessForm from "../components/WellnessForm";
+// import { loadLogs } from "../features/wellness/logSlice";
+import LoadingWrapper from "../components/LoadingWrapper";
+import { loadLogs } from "../store/reducer/logSlice";
+
+const LogTable = lazy(() => import("../components/LogTable"));
 
 const DashboardPage: React.FC = () => {
   const user = useAppSelector((state) => state.auth.user);
   const token = useAppSelector((state) => state.auth.token);
+  const isLogTableLoading = useAppSelector(
+    (state) => state.ui.loadingComponents["LogTable"]
+  );
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -42,8 +49,20 @@ const DashboardPage: React.FC = () => {
         {/* Form for adding new logs */}
         <WellnessForm />
 
-        {/* Table for displaying logs */}
-        <LogTable />
+        {/* Table for displaying logs, Lazy loaded */}
+
+        <Suspense
+          fallback={<div className="text-center mt-4">Loading logs...</div>}
+        >
+          <LoadingWrapper componentName="LogTable">
+            <LogTable />
+          </LoadingWrapper>
+        </Suspense>
+        {isLogTableLoading ? (
+          <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2 bg-indigo-600 text-white px-4 py-2 rounded shadow-lg">
+            Loading logs...
+          </div>
+        ) : null}
       </main>
     </div>
   );

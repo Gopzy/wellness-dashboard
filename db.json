@@ -44,6 +44,13 @@
       "sleepHours": 9,
       "notes": "Great sleep recorded",
       "userId": "b06c"
+    },
+    {
+      "id": "bd51",
+      "mood": "Focused",
+      "sleepHours": 6,
+      "notes": "Focused as an arrow",
+      "userId": "b06c"
     }
   ]
 }
