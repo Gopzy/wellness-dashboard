@@ -16,7 +16,7 @@ const ThemeToggle: React.FC = () => {
       className="bg-white text-indigo-600 hover:bg-gray-200 p-1.5 rounded-md transition flex items-center justify-center"
       title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
-      {theme === "dark" ? "🌙 Dark" : "☀️ Light"}
+      {theme === "dark" ? "Dark" : "Light"}
     </button>
   );
 };

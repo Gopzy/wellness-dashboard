@@ -138,7 +138,7 @@ const WellnessForm: React.FC = () => {
         {/* Confirmation */}
         {submitted ? (
           <div className="sm:col-span-2 text-green-600 text-sm mt-2">
-            Wellness log submitted successfully 🎉
+            Wellness log submitted successfully
           </div>
         ) : null}
       </form>
