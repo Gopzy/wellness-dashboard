@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { useAppSelector } from "../store";
 
 const LogTable: React.FC = () => {
-  const logs = useAppSelector((state) => state.logs.logs); // Ensure you're using .logs not .entries
+  const logs = useAppSelector((state) => state.logs.logs);
   const [search, setSearch] = useState("");
 
   const filteredLogs = useMemo(() => {

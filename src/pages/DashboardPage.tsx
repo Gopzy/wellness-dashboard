@@ -36,8 +36,6 @@ const DashboardPage: React.FC = () => {
         <h1 className="text-xl font-semibold">Wellness Dashboard</h1>
 
         <div className="flex items-center space-x-4">
-          {/* Theme Toggle */}
-
           <span className="text-sm">{user?.email}</span>
           <ThemeToggle />
           <button
@@ -50,11 +48,7 @@ const DashboardPage: React.FC = () => {
       </header>
 
       <main className="p-4 space-y-6">
-        {/* Form for adding new logs */}
         <WellnessForm />
-
-        {/* Table for displaying logs, Lazy loaded */}
-
         <Suspense
           fallback={<div className="text-center mt-4">Loading logs...</div>}
         >

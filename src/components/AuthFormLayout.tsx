@@ -1,14 +1,6 @@
 import React from "react";
 
-interface Props {
-  title: string;
-  onSubmit: (e: React.FormEvent) => void;
-  children: React.ReactNode;
-  submitLabel: string;
-  isSubmitting: boolean;
-}
-
-const AuthFormLayout: React.FC<Props> = ({
+const AuthFormLayout: React.FC<AuthFormLayoutProps> = ({
   title,
   onSubmit,
   children,

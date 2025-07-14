@@ -1,46 +1,77 @@
-# Getting Started with Create React App
+# Wellness Log Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive, elegant, and scalable "Wellness Tracker Dashboard" built with React, Redux Toolkit, TypeScript, Tailwind CSS, and Zod. It supports secure user authentication, real-time wellness log tracking, theme switching,
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### Authentication
 
-### `npm start`
+- Secure Signup and Login with real API integration
+- JWT-based session handling
+- User persisted in Redux and localStorage to survive page refresh
+- Logout clears session and Redux state
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Wellness Logging
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Log daily mood, sleep hours, and activity notes
+- Fully validated using Zod + react-hook-form
+- Realtime UI update on new log submission
+- Form resets with confirmation toast on success
 
-### `npm test`
+### Log Display
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Lazy-loaded LogTable lists user’s logs with:
+  - Date
+  - Mood
+  - Sleep hours
+  - Activity notes
 
-### `npm run build`
+### Search functionality
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Instant search functionality to filter logs by notes
+- Styled for mobile and desktop using Tailwind's responsive utilities
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Theme Switching (Light/Dark)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Toggle dark/light mode via header button
+- Preference saved in Redux and persisted in localStorage
+- Applied with Tailwind’s darkMode: 'class' support
 
-### `npm run eject`
+### Redux & API Integration
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Centralized store with slices for auth, logs, ui, and theme
+- Async thunks for login, signup, loading logs, and submitting entries
+- Global UI loading state tracking via uiSlice
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Performance Optimization
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Lazy loaded components using React.lazy and Suspense
+- LoadingWrapper dispatches global UI loading state for feedback
+- LogTable and other non-critical features are code-split
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## API handling through json-server
 
-## Learn More
+All API requests—signup, login, and wellness log storage—are handled through json-server. The mock API runs locally on http://localhost:3001 and uses a db.json file to persist user and log data
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Tailwind CSS Responsiveness
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+All UI components are built using Tailwind CSS with a strong focus on responsiveness
+
+- Uses Tailwind’s sm, md, lg and xl breakpoints
+- Layouts are fully optimized for both mobile and desktop
+- Clean and minimal design with accessible color contrast
+
+## Tech Stack
+
+-Frontend: React 18, TypeScript
+-State Management: Redux Toolkit
+-Form Handling: React Hook Form + Zod
+-Styling: Tailwind CSS (with darkMode: "class")
+-Routing: React Router v6
+-Mock Backend: json-server
+
+## How to run the Application
+
+-Step 1: npm install
+-Step 2: npx json-server --watch db.json --port 3001
+-Step 3: npm start

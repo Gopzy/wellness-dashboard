@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { fetchUserLogs, logWellnessEntry } from "../../api/wellness";
 import { WellnessFormData } from "../../schema/wellnessSchema";
-import { useAppSelector } from "../../store";
 
 export const loadLogs = createAsyncThunk(
   "logs/loadLogs",
@@ -61,7 +60,7 @@ const logSlice = createSlice({
         state.error = null;
       })
       .addCase(loadLogs.fulfilled, (state, action) => {
-        state.logs = action.payload.reverse(); // latest first
+        state.logs = action.payload.reverse();
         state.loading = false;
       })
       .addCase(loadLogs.rejected, (state, action) => {
@@ -69,7 +68,7 @@ const logSlice = createSlice({
         state.error = action.error.message || "Failed to load logs.";
       })
       .addCase(submitLog.fulfilled, (state, action) => {
-        state.logs.unshift(action.payload); // add new log
+        state.logs.unshift(action.payload);
       });
   },
 });

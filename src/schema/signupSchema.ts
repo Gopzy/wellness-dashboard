@@ -1,8 +1,5 @@
 import { z } from "zod";
 
-/**
- * Validation schema for signup form
- */
 export const signupSchema = z
   .object({
     email: z.string().email("Invalid email format"),
@@ -11,10 +8,7 @@ export const signupSchema = z
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
-    path: ["confirmPassword"], // error is shown under confirmPassword field
+    path: ["confirmPassword"],
   });
 
-/**
- * Inferred TypeScript type from the schema
- */
 export type SignupFormData = z.infer<typeof signupSchema>;

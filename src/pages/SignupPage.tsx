@@ -28,7 +28,6 @@ const SignupPage: React.FC = () => {
       // Dispatch token and user to Redux
       dispatch(setCredentials(result));
 
-      // Redirect to dashboard
       navigate("/dashboard");
     } catch (err: any) {
       alert(err.message || "Signup failed");
